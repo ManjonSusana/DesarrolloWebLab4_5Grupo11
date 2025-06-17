@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Chuquisaqueño - Seleccionar Acceso</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+    background: #fdf8ee;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.selection-container {
+    background: #fffef9;
+    border: 1px solid #e5d8b8;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 500px;
+    width: 90%;
+}
+
+.header-section {
+    background-color: #fff8e8;
+    padding: 2rem;
+    text-align: center;
+    color: #5d4825;
+}
+
+.hotel-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #d4a017;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.hotel-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #5d4825;
+}
+
+.hotel-subtitle {
+    font-size: 1rem;
+    color: #7a653b;
+}
+
+.stars {
+    color: #d4a017;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+.selection-section {
+    padding: 2rem;
+}
+
+.access-card {
+    background: #fff8e8;
+    border: 2px solid #f0e5c0;
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 1rem 0;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #5d4825;
+    text-decoration: none;
+    display: block;
+    box-shadow: 0 4px 10px rgba(212, 160, 23, 0.1);
+}
+
+.access-card:hover {
+    background: #fff1d8;
+    border-color: #d4a017;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(212, 160, 23, 0.3);
+    color: #5d4825;
+    text-decoration: none;
+}
+
+.access-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #d4a017;
+}
+
+.access-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #5d4825;
+}
+
+.access-description {
+    color: #7a653b;
+    font-size: 0.9rem;
+}
+
+.welcome-text {
+    color: #5d4825;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.text-muted {
+    color: #a39473 !important;
+}
+
+@media (max-width: 768px) {
+    .selection-container {
+        margin: 1rem;
+    }
+
+    .header-section, .selection-section {
+        padding: 1.5rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="selection-container">
+        <!-- Sección de encabezado -->
+        <div class="header-section">
+            <div class="hotel-icon">
+                <i class="fas fa-hotel"></i>
+            </div>
+            <div class="hotel-title">HOTEL CHUQUISAQUEÑO</div>
+            <div class="hotel-subtitle">Sucre - Bolivia</div>
+            <div class="stars">★★★★★</div>
+        </div>
+        
+        <!-- Sección de selección -->
+        <div class="selection-section">
+            <div class="welcome-text">
+                <h3>
+                    <i class="fas fa-user-check me-2"></i>
+                    Seleccionar Tipo de Acceso
+                </h3>
+                <p class="mb-4">Elige cómo deseas ingresar al sistema</p>
+            </div>
+            
+            <!-- Opción Administrador -->
+            <a href="formlogin.html?tipo=admin" class="access-card" id="admin-access">
+                <div class="access-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="access-title">Ingresar como Administrador</div>
+                <div class="access-description">
+                    Panel de administración completo<br>
+                    Gestión de usuarios, habitaciones y reservas
+                </div>
+            </a>
+            
+            <!-- Opción Cliente -->
+            <a href="formlogin.html?tipo=cliente" class="access-card" id="client-access">
+                <div class="access-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="access-title">Ingresar como Cliente</div>
+                <div class="access-description">
+                    Portal de cliente<br>
+                    Reservas, consultas y gestión personal
+                </div>
+            </a>
+            
+            <div class="text-center mt-4">
+                <small class="text-muted">
+                    <i class="fas fa-shield-alt me-1"></i>
+                    Sistema seguro de gestión hotelera
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Efectos visuales
+        document.querySelectorAll('.access-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

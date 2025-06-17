@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - Panel Administrativo</title>
+    <style>
+        .dashboard-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            color: white;
+            margin: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        .welcome-section {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #c4002c, #a70024);
+            border-radius: 12px;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-section">
+        <h1>🏨 Panel de Administración</h1>
+        <p>Hotel Chuquisaqueño - Sistema de Gestión</p>
+        <p><i class="bi bi-calendar"></i> <?php echo date('d/m/Y H:i'); ?></p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="dashboard-card">
+            <div class="stat-number" id="total-usuarios">-</div>
+            <div class="stat-label">👥 Usuarios Registrados</div>
+        </div>
+        
+        <div class="dashboard-card">
+            <div class="stat-number" id="total-habitaciones">-</div>
+            <div class="stat-label">🏠 Total Habitaciones</div>
+        </div>
+        
+        <div class="dashboard-card">
+            <div class="stat-number" id="total-reservas">-</div>
+            <div class="stat-label">📋 Reservas Totales</div>
+        </div>
+        
+        <div class="dashboard-card">
+            <div class="stat-number" id="habitaciones-disponibles">-</div>
+            <div class="stat-label">✅ Habitaciones Disponibles</div>
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+        <h3>🚀 Acciones Rápidas</h3>
+        <button onclick="cargarContenido('usuarios.html')" style="margin: 0.5rem; padding: 0.5rem 1rem; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            👥 Gestionar Usuarios
+        </button>
+        <button onclick="cargarContenido('habitaciones.html')" style="margin: 0.5rem; padding: 0.5rem 1rem; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            🏠 Gestionar Habitaciones
+        </button>
+        <button onclick="cargarContenido('reservas.html')" style="margin: 0.5rem; padding: 0.5rem 1rem; background: #c4002c; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            📋 Gestionar Reservas
+        </button>
+    </div>
+
+    <script>
+        // Cargar estadísticas
+        fetch('readUsuarios.php')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('total-usuarios').textContent = data.length;
+            })
+            .catch(err => console.error('Error cargando usuarios:', err));
+
+        fetch('readHabitaciones.php')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('total-habitaciones').textContent = data.length;
+                const disponibles = data.filter(h => h.estado === 'disponible').length;
+                document.getElementById('habitaciones-disponibles').textContent = disponibles;
+            })
+            .catch(err => console.error('Error cargando habitaciones:', err));
+
+        fetch('readReservas.php')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('total-reservas').textContent = data.length;
+            })
+            .catch(err => console.error('Error cargando reservas:', err));
+    </script>
+</body>
+</html>

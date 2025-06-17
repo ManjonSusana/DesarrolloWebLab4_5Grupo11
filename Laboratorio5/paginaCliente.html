@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Hotel Chuquisaqueño - Sistema de Reservas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+   <style>
+    body {
+    background: linear-gradient(120deg, #fffde4 0%, #f3e7e9 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    color: #181818;
+    letter-spacing: 0.02em;
+}
+
+.navbar-custom {
+    background: rgba(25, 25, 25, 0.93);
+    border-bottom: 2.5px solid #e57373;
+    box-shadow: 0 2px 18px 0 #ffd70018;
+    backdrop-filter: blur(6px);
+}
+
+.logo {
+    color: #e57373;
+    font-size: 2rem;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 2px;
+    transition: color 0.2s, text-shadow 0.2s;
+    text-shadow: 0 2px 8px #ffd70033;
+}
+.logo span {
+    font-size: 1rem;
+    color: #ffe082;
+    display: block;
+    letter-spacing: 1px;
+}
+.logo:hover {
+    color: #ffd700;
+    text-shadow: 0 4px 14px #e5737390;
+}
+
+.nav-item-custom {
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+    padding: 0.45rem 1rem;
+    margin: 0 0.20rem;
+    border-radius: 22px;
+    font-weight: 600;
+    font-size: 1.03rem;
+    border: 1px solid transparent;
+    transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.25s, transform 0.2s;
+    box-shadow: 0 1px 10px 0 #e5737315;
+}
+.nav-item-custom:hover, .nav-item-custom:focus {
+    background:  #e57373;
+    color: #181818;
+    border: 1.5px solid #ffd700;
+    box-shadow: 0 3px 18px 0 #ffd70044;
+    transform: scale(1.07);
+}
+
+.btn-reserva-custom {
+    background:  #e57373;
+    color: #181818;
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-radius: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    box-shadow: 0 4px 16px #e5737360;
+    transition: all 0.23s;
+}
+.btn-reserva-custom:hover, .btn-reserva-custom:focus {
+    background:  #e57373 ;
+    color: #181818;
+    box-shadow: 0 10px 34px #ffd70060;
+    transform: translateY(-3px) scale(1.04);
+}
+
+.hero {
+    background: linear-gradient(rgba(255,255,255,0.5), rgba(255, 221, 130, 0.12)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    margin-top: 40px;
+    box-shadow: 0 8px 30px 0 #e5737325;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-content {
+    text-align: center;
+    color: #181818;
+    z-index: 2;
+    background: rgba(255,255,255,0.80);
+    padding: 3rem 2rem 2rem 2rem;
+    border-radius: 22px;
+    box-shadow: 0 2px 18px #ffd70018;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    font-family: 'Playfair Display', serif;
+    color: #e57373;
+    margin-bottom: 0.7rem;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px #ffd70012;
+}
+.hero-content h2 {
+    font-size: 2rem;
+    color: #ffd700;
+    margin-bottom: 1.3rem;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 1px;
+}
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #181818;
+    opacity: 0.82;
+}
+.stars {
+    font-size: 2.1rem;
+    color: #ffd700;
+    text-shadow: 0 0 10px #ffd70080;
+    letter-spacing: 5px;
+}
+.card {
+    transition: all 0.23s;
+    border-radius: 16px;
+    border: 1.5px solid #ffe08270;
+    box-shadow: 0 4px 18px #e5737312;
+}
+.card:hover {
+    box-shadow: 0 10px 32px #ffd70024;
+    border-color: #ffd700ab;
+    transform: scale(1.03);
+}
+#contenido {
+    min-height: 400px;
+    background: #fffde4;
+    border-radius: 22px;
+    margin: 2.4rem 0 2rem 0;
+    padding: 2.2rem;
+    box-shadow: 0 4px 24px #ffd70012;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(25, 25, 25, 0.80);
+    backdrop-filter: blur(7px);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #fffde4 60%, #ffe082 100%);
+    margin: 5% auto;
+    padding: 0;
+    border: 2px solid #e57373bb;
+    border-radius: 18px;
+    width: 90%;
+    max-width: 820px;
+    box-shadow: 0 25px 50px #ffd70044;
+    animation: modalSlideIn 0.35s cubic-bezier(.69,-0.14,.59,1.35);
+}
+
+@keyframes modalSlideIn {
+    from { opacity: 0; transform: translateY(-40px) scale(0.9);}
+    to   { opacity: 1; transform: translateY(0) scale(1);}
+}
+
+.cerrar {
+    color: #e57373;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 15px;
+    transition: all 0.2s;
+}
+.cerrar:hover {
+    color: #ffd700;
+    text-shadow: 0 0 10px #ffd700;
+    transform: scale(1.12);
+}
+
+/* Toast container fix */
+.toast-container {
+    z-index: 10000;
+}
+
+/* Efectos de hover para mejorar la interactividad */
+.card {
+    transition: all 0.23s;
+}
+.card:hover {
+    transform: translateY(-5px) scale(1.04);
+    box-shadow: 0 14px 34px #ffd70020;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2rem;}
+    .hero-content h2 { font-size: 1.2rem;}
+    .hero-content { padding: 1.5rem 0.7rem;}
+    .navbar-custom { padding: 0.4rem 0;}
+    .nav-item-custom { margin: 0.18rem 0;}
+    .hero { height: 38vh; }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Navbar mejorado -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <div class="logo" onclick="cargarContenido('menu.php')">
+                HOTEL CHUQUISAQUEÑO
+                <span>Sucre - Bolivia</span>
+            </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="nav-item-custom" onclick="cargarContenido('verTipos.php')">
+                    <i class="fas fa-bed me-2"></i>
+                    TIPOS DE HABITACIÓN
+                </div>
+                <div class="nav-item-custom" onclick="cargarContenido('verHabitaciones.php')">
+                    <i class="fas fa-door-open me-2"></i>
+                    HABITACIONES
+                </div>
+                <div class="nav-item-custom" onclick="cargarPagina()">
+                    <i class="fas fa-envelope me-2"></i>
+                    CONTÁCTANOS
+                </div>
+            <div class="collapse navbar-nav mx-auto" id="navbarNav">
+                
+            </div>
+
+            <button class="btn-reserva-custom" onclick="cargarContenido('verReservas.php')">
+                <i class="fas fa-calendar-check me-2"></i>
+                MIS RESERVACIONES
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div id="contenido" style="margin-top: 100px;">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Somos el mejor Hotel</h1>
+                <h2>HOTEL CHUQUISAQUEÑO</h2>
+                <p>Contamos con todas las comodidades para ti</p>
+                <div class="stars">★★★★★</div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Modal mejorado -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="cerrar" onclick="cerrarModal()">
+                <i class="fas fa-times"></i>
+            </span>
+            <div id="modal-body" class="p-4"></div>
+        </div>
+    </div>
+
+    <!-- Container para notificaciones toast -->
+    <div class="toast-container position-fixed top-0 end-0 p-3"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        // Función específica para cargar página de contacto
+        function cargarPagina() {
+            mostrarNotificacion('Funcionalidad de contacto próximamente disponible', 'info');
+        }
+        
+        // Cerrar modal con tecla Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                cerrarModal();
+            }
+        });
+        
+        // Efecto de parallax para el hero
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+        
+        // Inicialización de tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+</html>

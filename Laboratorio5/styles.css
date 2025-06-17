@@ -1,0 +1,304 @@
+/* Estilos CSS mejorados para el Hotel Chuquisaqueño */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: 'Segoe UI', sans-serif;
+  height: 100%;
+  background: linear-gradient(135deg, #faf7f0 0%, #f5f2e8 50%, #ede8d8 100%);
+  color: #5a4a3a;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  z-index: 10; 
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid #d4af37;
+  box-shadow: 0 2px 20px rgba(218, 188, 150, 0.3);
+}
+
+.logo {
+  background: linear-gradient(45deg, #d4af37, #f4d03f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+.logo span {
+  font-size: 12px;
+  color: #8a7a6a;
+  display: block;
+}
+
+.navegador {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-item {
+  color: #5a4a3a;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.nav-item:hover {
+  background: linear-gradient(45deg, #d4af37, #f4d03f);
+  color: #5a4a3a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn-reserva {
+  background: linear-gradient(45deg, #a8d8a8, #90c695);
+  color: #4a5a4a;
+  padding: 12px 24px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(168, 216, 168, 0.3);
+}
+
+.btn-reserva:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(168, 216, 168, 0.4);
+  background: linear-gradient(45deg, #90c695, #7fb888);
+  text-decoration: none;
+  color: #3a4a3a;
+}
+
+.hero {
+  height: 100vh;
+  background: linear-gradient(rgba(250, 247, 240, 0.9), rgba(245, 242, 232, 0.9)), 
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23d4af37" width="1200" height="600"/><polygon fill="%23f4d03f" points="0,0 0,400 800,600 1200,200 1200,0"/></svg>');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><text y="15" font-size="20" fill="%23d4af37" opacity="0.3">★</text></svg>') repeat;
+  animation: float 20s infinite linear;
+}
+
+@keyframes float {
+  0% { transform: translateX(0px); }
+  100% { transform: translateX(-100px); }
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(250, 247, 240, 0.3);
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #5a4a3a;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  animation: fadeInUp 1s ease-out;
+}
+
+.hero-content h2 {
+  font-size: 2.5rem;
+  background: linear-gradient(45deg, #d4af37, #f4d03f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+  animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.stars {
+  font-size: 2rem;
+  color: #ffd700;
+  animation: fadeInUp 1s ease-out 0.6s both;
+  text-shadow: 0 0 10px #ffd700;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-tarif {
+  margin-top: 20px;
+  background: linear-gradient(45deg, #a8d8a8, #90c695);
+  color: #4a5a4a;
+  padding: 15px 30px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(168, 216, 168, 0.3);
+}
+
+.btn-tarif:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(168, 216, 168, 0.4);
+  background: linear-gradient(45deg, #90c695, #7fb888);
+  text-decoration: none;
+  color: #3a4a3a;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.95);
+  margin: 5% auto;
+  padding: 0;
+  border: 1px solid rgba(218, 188, 150, 0.3);
+  border-radius: 15px;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0 25px 50px rgba(218, 188, 150, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.cerrar {
+  color: #d4af37;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 15px;
+  transition: all 0.3s ease;
+}
+
+.cerrar:hover {
+  color: #5a4a3a;
+  text-shadow: 0 0 10px #d4af37;
+  transform: scale(1.1);
+}
+
+#contenido {
+  padding-top: 120px;
+  min-height: 400px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  margin: 2rem 0;
+  padding: 2rem;
+  border: 1px solid rgba(218, 188, 150, 0.2);
+  box-shadow: 0 4px 20px rgba(218, 188, 150, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .navegador {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-content h2 {
+    font-size: 2rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.1rem;
+  }
+  
+  .stars {
+    font-size: 1.5rem;
+  }
+  
+  #contenido {
+    padding-top: 180px;
+  }
+}

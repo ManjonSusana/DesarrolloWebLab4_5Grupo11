@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Chuquisaqueño - Iniciar Sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+    background: #fdf8ee;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    background: #fffef9;
+    border: 1px solid #e5d8b8;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.brand-section {
+    background-color: #fff8e8;
+    padding: 2rem;
+    text-align: center;
+    color: #5d4825;
+}
+
+.brand-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #5d4825;
+}
+
+.brand-subtitle {
+    font-size: 1rem;
+    color: #7a653b;
+}
+
+.form-section {
+    padding: 2rem;
+}
+
+.form-control {
+    background: #fffdf7;
+    border: 1px solid #e0d4b8;
+    color: #5d4825;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+}
+
+.form-control:focus {
+    background: #fffbe9;
+    border-color: #d4a017;
+    color: #5d4825;
+    box-shadow: 0 0 0 0.2rem rgba(212, 160, 23, 0.25);
+}
+
+.form-control::placeholder {
+    color: #9c8b68;
+}
+
+.form-label {
+    color: #5d4825;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.btn-login {
+    background: linear-gradient(45deg, #d4a017, #b28c1d);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(212, 160, 23, 0.3);
+    color: #070707;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 160, 23, 0.4);
+    background: linear-gradient(45deg, #b28c1d, #8f7312);
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #bba677;
+    z-index: 10;
+}
+
+.input-group .form-control {
+    padding-left: 45px;
+}
+
+.login-title {
+    color: #5d4825;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.hotel-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #d4a017;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.stars {
+    color: #d4a017;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+.text-muted {
+    color: #a39473 !important;
+}
+
+@media (max-width: 768px) {
+    .login-card {
+        margin: 1rem;
+    }
+
+    .brand-section, .form-section {
+        padding: 1.5rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5">
+                <div class="login-card">
+                    <!-- Sección de marca -->
+                    <div class="brand-section">
+                        <div class="hotel-icon">
+                            <i class="fas fa-hotel"></i>
+                        </div>
+                        <div class="brand-title">HOTEL CHUQUISAQUEÑO</div>
+                        <div class="brand-subtitle">Sucre - Bolivia</div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                      <!-- Sección del formulario -->
+                    <div class="form-section">
+                        <h3 class="login-title" id="loginTitle">
+                            <i class="fas fa-sign-in-alt me-2"></i>
+                            Iniciar Sesión
+                        </h3>
+                        
+                        <!-- Botón de regreso -->
+                        <div class="text-center mb-3">
+                            <a href="seleccionar_acceso.html" class="btn btn-outline-light btn-sm">
+                                <i class="fas fa-arrow-left me-2"></i>
+                                Cambiar tipo de acceso
+                            </a>
+                        </div>
+                        
+                        <form action="autenticar.php" method="post" id="loginForm">
+                            <!-- Campo oculto para tipo de usuario -->
+                            <input type="hidden" name="tipo_usuario" id="tipo_usuario" value="">
+                            
+                            <!-- Indicador del tipo de acceso seleccionado -->
+                            <div class="input-group mb-3">
+                                <i class="fas fa-user-tag input-icon"></i>
+                                <input type="text" class="form-control" id="tipo_display" readonly style="background-color: rgba(255,255,255,0.1); color: white;">
+                            </div>
+                            
+                            <div class="input-group">
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input type="email" 
+                                       class="form-control" 
+                                       name="correo" 
+                                       placeholder="Ingresa tu correo electrónico"
+                                       required>
+                            </div>
+                            
+                            <div class="input-group">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" 
+                                       class="form-control" 
+                                       name="password" 
+                                       placeholder="Ingresa tu contraseña"
+                                       required>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-login btn-lg">
+                                    <i class="fas fa-sign-in-alt me-2"></i>
+                                    Ingresar al Sistema
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div class="text-center mt-4">
+                            <small class="text-muted">
+                                <i class="fas fa-shield-alt me-1"></i>
+                                Acceso seguro al sistema de reservas
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Detectar tipo de usuario desde URL
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Loaded');
+            const urlParams = new URLSearchParams(window.location.search);
+            const tipoFromUrl = urlParams.get('tipo');
+            
+            console.log('Tipo desde URL:', tipoFromUrl);
+            
+            if (tipoFromUrl) {
+                const tipoUsuario = tipoFromUrl === 'admin' ? 'admin' : 'cliente';
+                const tipoDisplay = tipoFromUrl === 'admin' ? 'Administrador' : 'Cliente';
+                
+                console.log('Estableciendo tipo_usuario:', tipoUsuario);
+                console.log('Estableciendo tipo_display:', tipoDisplay);
+                
+                const tipoInput = document.getElementById('tipo_usuario');
+                const displayInput = document.getElementById('tipo_display');
+                const titleElement = document.getElementById('loginTitle');
+                
+                if (tipoInput) {
+                    tipoInput.value = tipoUsuario;
+                    console.log('Valor del campo tipo_usuario después de establecer:', tipoInput.value);
+                } else {
+                    console.error('Campo tipo_usuario no encontrado');
+                }
+                
+                if (displayInput) {
+                    displayInput.value = tipoDisplay;
+                }
+                
+                if (titleElement) {
+                    titleElement.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>Acceso ' + tipoDisplay;
+                }
+            } else {
+                console.log('No hay parámetro tipo en URL, redirigiendo...');
+                window.location.href = 'seleccionar_acceso.html';
+            }
+        });
+        
+        // Validación del formulario
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            const tipoUsuario = document.querySelector('[name="tipo_usuario"]').value;
+            const correo = document.querySelector('[name="correo"]').value;
+            const password = document.querySelector('[name="password"]').value;
+            
+            console.log('Enviando formulario con:');
+            console.log('tipo_usuario:', tipoUsuario);
+            console.log('correo:', correo);
+            console.log('password length:', password.length);
+            
+            if (!tipoUsuario || !correo || !password) {
+                e.preventDefault();
+                alert('Por favor, completa todos los campos. Tipo usuario: "' + tipoUsuario + '"');
+                return false;
+            }
+            
+            // Cambiar el botón mientras se procesa
+            const btn = document.querySelector('.btn-login');
+            if (btn) {
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Iniciando sesión...';
+                btn.disabled = true;
+            }
+        });
+        
+        // Efecto focus en los inputs
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                const icon = this.parentElement.querySelector('.input-icon');
+                if (icon) {
+                    icon.style.color = '#c4002c';
+                }
+            });
+            
+            input.addEventListener('blur', function() {
+                const icon = this.parentElement.querySelector('.input-icon');
+                if (icon) {
+                    icon.style.color = 'rgba(255, 255, 255, 0.7)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

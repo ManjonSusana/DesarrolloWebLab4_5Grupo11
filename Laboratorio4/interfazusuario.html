@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfaz Usuario</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="script.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
+        <div class="bg-dark p-4">
+            <h5 class="text-body-emphasis h4">Usuario</h5>
+            <div class="i">
+                <button type="button" class="btn btn-light" onclick="BandejaEntrada()">Bandeja de Entrada</button>
+                <button type="button" class="btn btn-light" onclick="BandejaSalida()">Bandeja de Salida</button>
+                <button type="button" class="btn btn-light" onclick="BandejaBorradores()">Bandeja de Borrador</button>
+                <button type="button" class="btn btn-light" class="redactar" onclick="redactar()">Redactar</button>
+                <button type="button" class="btn btn-light" onclick="cerrarSesion()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span> Opciones
+        </button>
+    </div>
+    </nav>
+
+
+    <div class="contenido" id="contenido">
+        <h1>Bienvenido</h1>
+        <h3>Usted ingreso como Usuario</h3>
+            
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="titulo-modal">Título del Modal</h2>
+        <div id="contenido-modal"></div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

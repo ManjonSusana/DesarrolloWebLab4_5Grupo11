@@ -1,0 +1,448 @@
+<button onclick="mostrarModalReserva()" class="btn-registro">
+    <i class="bi bi-calendar-plus-fill"></i> Nueva Reserva
+</button>
+
+<div id="barra-reservas" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+
+    <div id="pestanas-reservas"></div>
+
+    <div>
+        <input type="text" id="filtro-nombre" placeholder="Buscar por nombre..." style="padding: 6px; width: 200px; border-radius: 4px; border: 1px solid #ccc;" oninput="buscarPorNombre()">
+        <button class="btn-buscar" onclick="buscarPorNombre()"><i class="bi bi-search"></i></button>
+    </div>
+</div>
+
+
+<table border="1" cellpadding="6" cellspacing="0" style="width: 100%; margin-top: 10px;">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Tipo Habitación</th>
+            <th>Entrada</th>
+            <th>Salida</th>
+            <th>Estado</th>
+            <th>Fecha Reserva</th>
+            <th>Cambiar Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="tabla-reservas">
+        
+    </tbody>
+</table>
+
+<!-- Modal de Reserva -->
+<div id="modal-reserva" style="display:none;">
+    <div class="contenido-modal">
+        <h3>Registrar Reserva</h3>
+
+        <label>Nombre del Cliente:</label>
+        <input type="text" id="nombre_cliente"><br>
+
+        <label>Correo:</label>
+        <input type="email" id="correo_cliente"><br>
+
+        <label>Teléfono:</label>
+        <input type="text" id="telefono_cliente"><br>
+
+        <label>Tipo de habitación:</label>
+        <input type="text" id="tipo_habitacion"><br>
+
+        <label>Fecha Entrada:</label>
+        <input type="date" id="fecha_entrada"><br>
+
+        <label>Fecha Salida:</label>
+        <input type="date" id="fecha_salida"><br>
+
+        <button class="btn-editar" onclick="registrarReserva()">
+            <i class="bi bi-check-circle-fill"></i> Registrar
+        </button>
+        <button class="btn-eliminar" onclick="cerrarModalReserva()">
+            <i class="bi bi-x-circle-fill"></i> Cancelar
+        </button>
+    </div>
+</div>
+
+<!-- Modal Editar Reserva -->
+<div id="modal-editar-reserva" style="display:none;">
+    <div class="contenido-modal">
+        <h3>Editar Reserva</h3>
+
+        <input type="hidden" id="editar-id">
+
+        <label>Nombre:</label>
+        <input type="text" id="editar-nombre">
+
+        <label>Tipo habitación:</label>
+        <select id="editar-tipo"></select>
+
+        <label>Fecha Entrada:</label>
+        <input type="date" id="editar-entrada">
+
+        <label>Fecha Salida:</label>
+        <input type="date" id="editar-salida">
+
+        <button class="btn-editar" onclick="guardarEdicionReserva()">
+            <i class="bi bi-check-circle-fill"></i> Guardar
+        </button>
+        <button class="btn-eliminar" onclick="cerrarModalEditarReserva()">
+            <i class="bi bi-x-circle-fill"></i> Cancelar
+        </button>
+    </div>
+</div>
+
+<!-- Modal Asignar Habitación -->
+<div id="modal-asignar">
+    <div class="contenido-modal">
+        <h3>Asignar Habitación</h3>
+        <input type="hidden" id="reserva-id-asignar">
+        
+        <div style="margin-bottom: 10px;">
+            <label>Tipo de habitación:</label>
+            <div id="tipo-mostrar" style="font-weight: bold; color: #555;"></div>
+        </div>
+
+        <label>Habitación disponible:</label>
+        <select id="habitacion-disponible"></select>
+
+        <button class="btn-editar" onclick="confirmarAsignacion()">
+            <i class="bi bi-check-circle-fill"></i> Confirmar
+        </button>
+        <button class="btn-eliminar" onclick="cerrarModalAsignar()">
+            <i class="bi bi-x-circle-fill"></i> Cancelar
+        </button>
+    </div>
+</div>
+
+
+
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    margin-top: 3px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #428bca;
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background-color: #9e9e9e;
+}
+
+th {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+.btn-registro {
+    background-color: green;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.btn-editar {
+    background-color: rgb(253, 204, 56);
+    border: none;
+    padding: 5px 10px;
+    margin: 0 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.btn-eliminar {
+    background-color: rgb(253, 61, 61);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    margin: 0 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#modal-reserva {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+}
+#modal-reserva .contenido-modal {
+    background: white;
+    width: 320px;
+    margin: 100px auto;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+#modal-reserva h3 { text-align: center; margin-top: 0; }
+#modal-reserva label { font-weight: bold; font-size: 13px; }
+#modal-reserva input {
+    width: 100%;
+    padding: 6px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+#modal-reserva button {
+    width: 48%;
+    padding: 8px 0;
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#modal-reserva .btn-editar { background-color: #28a745; color: white; }
+#modal-reserva .btn-eliminar { background-color: #dc3545; color: white; float: right; }
+
+
+#modal-editar-reserva {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+}
+#modal-editar-reserva .contenido-modal {
+    background: white;
+    width: 320px;
+    margin: 100px auto;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+
+
+.btn-estado {
+    padding: 5px 8px;
+    margin: 2px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-estado.pendiente {
+    background-color: #d69f31;
+}
+
+.btn-estado.confirmada {
+    background-color: #5cb85c;
+}
+
+.btn-estado.cancelada {
+    background-color: #d9534f;
+}
+
+.btn-estado.reservar {
+    background-color: #4790df;
+}
+
+.btn-estado:hover {
+    opacity: 0.8;
+}
+
+
+#modal-editar-reserva {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+}
+
+#modal-editar-reserva .contenido-modal {
+    background: white;
+    width: 320px;
+    margin: 100px auto;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+#modal-editar-reserva h3 {
+    margin-top: 0;
+    color: #333;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+#modal-editar-reserva label {
+    font-weight: bold;
+    font-size: 13px;
+    display: block;
+    margin-top: 8px;
+}
+
+#modal-editar-reserva input,
+#modal-editar-reserva select {
+    width: 100%;
+    padding: 6px;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+#modal-editar-reserva button {
+    width: 48%;
+    padding: 8px 0;
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#modal-editar-reserva .btn-editar {
+    background-color: #28a745;
+    color: white;
+}
+
+#modal-editar-reserva .btn-eliminar {
+    background-color: #dc3545;
+    color: white;
+    float: right;
+}
+
+
+.btn-pestana {
+    background-color: #ddd;
+    border: none;
+    padding: 8px 15px;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn-pestana.activo {
+    background-color: #428bca;
+    color: white;
+}
+
+.btn-buscar {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    margin-left: 5px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn-buscar:hover {
+    background-color: #0056b3;
+}
+
+#modal-asignar {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    font-family: Arial, sans-serif;
+}
+
+#modal-asignar .contenido-modal {
+    background: white;
+    width: 320px;
+    margin: 100px auto;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+#modal-asignar h3 {
+    margin-top: 0;
+    color: #333;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+#modal-asignar label {
+    font-weight: bold;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+#modal-asignar select {
+    width: 100%;
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+#modal-asignar button {
+    width: 48%;
+    padding: 8px 0;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#modal-asignar .btn-editar {
+    background-color: #28a745;
+    color: white;
+}
+
+#modal-asignar .btn-eliminar {
+    background-color: #dc3545;
+    color: white;
+    float: right;
+}
+
+</style>
